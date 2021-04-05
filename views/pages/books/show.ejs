@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../puplic/styles/style.css">
-  <title>Book App</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <title>BOOK APP</title>
 </head>
 <body>
 
-
   <header>
-    <h1>Book App</h1>
+    <h1 id="logo"><a href="/">Book App</a></h1>
+    <p id="search-page"><a href="/searches/new">Search Books</a></p>
   </header>
 
   <main>
     
-    <h1 id="form-title">Search By Title or Author</h1>
-  
+    <h1 id="form-title">Book Details</h1>
+
     <section id="book-section">
-      <% searchResults.forEach(book => { %>
+      <% databaseResults.forEach(book => { %>
         <section id="info-section">
           <section id="img-section">
             <img class="book-thumbnail" src="<%= book.thumbnail %>" alt="">
@@ -27,17 +27,18 @@
           <p id="book-title"><%= book.title %></p>
           <p id="book-author"><%= book.author %></p>
           <p id="book-description"><%= book.description %></p>
+          <p id="book-isbn"><%= book.isbn %></p>
+          <p id="book-details"><a href="/">GET BACK TO HOME</a></p>
         </section>
       <% }); %>
     </section>
-
+    
   </main>
 
+  <section id="before-footer"></section>
   <footer>
     <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
+   
   </footer>
 
 </body>
