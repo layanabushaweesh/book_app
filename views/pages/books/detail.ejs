@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     
+<section id="book-section">
+    <% databaseResults.forEach(book => { %>
+      <section id="info-section">
+        <section id="img-section">
+          <img class="book-thumbnail" src="<%= book.thumbnail %>" alt="">
+        </section>
+        <p id="book-title"><%= book.title %></p>
+        <p id="book-author"><%= book.author %></p>
+        <p id="book-description"><%= book.description %></p>
+        <p id="book-isbn"><%= book.isbn %></p>
+        <p id="book-details"><a href="/books/<%= book.id %>">Show THE Detales</a></p>
+      </section>
+    <% }); %> 
+</section>
+    
+</body>
+</html>
