@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../puplic/styles/style.css">
-  <title>Book App</title>
+  <%- include('../layout/head.ejs') %> 
+
 </head>
 <body>
-
+  <%- include('../layout/header.ejs') %>
 
   <header>
     <h1>Book App</h1>
@@ -34,10 +31,10 @@
   </main>
 
   <footer>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
+    <footer>
+      <%- include('../layout/footer.ejs') %>
+    
+    </footer>
   </footer>
 
 </body>

@@ -34,7 +34,7 @@ app.get('/', renderHome);
 app.get('/searches/new', renderSearch);
 app.post('/searches', renderResults);
 
-//rout when i select the id of the bok
+//rout when i select the id of the book
 
 app.get('/books/:id', renderIdBook);
 
@@ -42,6 +42,7 @@ app.get('/books/:id', renderIdBook);
 
 // Start App
 app.listen(PORT, () => console.log(`Up listen on PORT ${PORT}`));
+
 
 
 
@@ -77,6 +78,7 @@ function renderSearch(req, res) {
   res.render('pages/searches/new');
 }
 
+
 function renderResults(req, res) {
   
 
@@ -101,7 +103,19 @@ function renderResults(req, res) {
   });
 }
 
+function renderIdBook(req, res) {
+  const values = [req.params.id];
+  const sql = 'SELECT * FROM books WHERE id=$1;';
+  rendering(sql, values, res);
+}
 
+function rendering(sql, values, res) {
+  client.query(sql, values).then(data => {
+    res.render('pages/books/show', { databaseResults: data.rows })
+  }).catch(error => {
+    handleError(error, res);
+  })
+}
 
 
 //// Constructor
