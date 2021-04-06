@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/styles.css">
-  <title>Book App</title>
+  <%- include('./layout/head.ejs') %>
 </head>
 <body>
-
-  <header>
-    <h1 id="logo"><a href="/">Book App</a></h1>
-    <p id="search-page"><a href="/searches/new">Search Books</a></p>
-  </header>
+<!-- using partial reuse the code -->
+  <%- include('./layout/header.ejs') %>
 
   <main>
     
@@ -22,13 +15,7 @@
 
   </main>
 
-  <section id="before-footer"></section>
-  <footer>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </footer>
+  <%- include('./layout/footer.ejs') %>
   
 </body>
 </html>

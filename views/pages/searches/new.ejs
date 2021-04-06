@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/style.css">
-  <title>Book App</title>
-</head>
-<body>
+  <head>
 
-  <header>
+    <%- include('../layout/head.ejs') %> 
+  </head>
+  <body>
+       
+    <header>
+      <%- include('../layout/header.ejs') %>
+    </header>
+
+
+  
+
+
     <h1>Book App</h1>
   </header>
 
@@ -18,7 +22,7 @@
     <h1 id="form-title">Search Results</h1>
 
     <form action="/searches" method="post">
-      <input id="text-input" type="text" name="search" placeholder="Enter a title or author" required>
+      <input id="text-input" type="text" name="search" placeholder="Enter a title " required>
       <fieldset class="fieldset">
         <label for="title">
           <span>Title</span>
@@ -36,11 +40,8 @@
   </main>
 
   <footer>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </footer>
+    <%- include('../layout/footer.ejs') %>
   
+  </footer>
 </body>
 </html>
