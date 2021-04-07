@@ -1,0 +1,98 @@
+.Bookimg {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 120px;
+    height: 200px;
+}
+
+.p1 {
+    grid-column: 2 / 3;
+    grid-row: 4 /5;
+    font-size: 12px;
+}
+
+.p2 {
+    grid-column: 2 / 3;
+    grid-row: 6 /7;
+    font-size: 12px;
+}
+
+.p3 {
+    grid-column: 2 / 3;
+    grid-row: 8/ 9;
+    font-size: 12px;
+    padding: 0 10px 0 10px;
+}
+
+.p4 {
+    grid-column: 2/3;
+    grid-row: 10 /11;
+    font-size: 12px;
+}
+
+.btn1 {
+    grid-column: 2/3;
+    grid-row: 7 /8;
+    font-size: 12px;
+}
+
+.btn2 {
+    grid-column: 2/3;
+    grid-row: 10 /11;
+    font-size: 11px;
+}
+
+.btn3 {
+    grid-column: 2/3;
+    grid-row: 12 /13;
+    font-size: 11px;
+}
+
+.btn4 {
+    grid-column: 2/3;
+    grid-row: 13 /14;
+    font-size: 11px;
+}
+
+.inp1 {
+    grid-column: 2 / 5;
+    grid-row: 8 /9;
+}
+
+.inp2 {
+    grid-column: 2 / 5;
+    grid-row: 2 /3;
+}
+
+.inp3 {
+    grid-column: 2 / 5;
+    grid-row: 4/5;
+}
+
+.inp4 {
+    grid-column: 2 / 5;
+    grid-row: 10/11;
+}
+
+.inp5 {
+    grid-column: 2 / 5;
+    grid-row: 6/ 7;
+}
+
+.btn5 {
+    grid-column: 2/5;
+    grid-row: 12 /13;
+    font-size: 13px;
+}
+
+.searchInput {
+    grid-column: 1 / 6;
+    grid-row: 4/ 5;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.inpRadio1 {
+    grid-column: 2 / 3;
+    grid-row: 6/ 7;
+}
