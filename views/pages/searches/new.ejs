@@ -1,47 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
-    <%- include('../layout/head.ejs') %> 
-  </head>
-  <body>
-       
-    <header>
-      <%- include('../layout/header.ejs') %>
-    </header>
+<head>
+    <%- include('../../layout/head.ejs')%>
 
+        <!-- <title>Book Collection</title> -->
+</head>
 
-  
-
-
-    <h1>Book App</h1>
-  </header>
-
-  <main>
-    
-    <h1 id="form-title">Search Results</h1>
-
-    <form action="/searches" method="post">
-      <input id="text-input" type="text" name="search" placeholder="Enter a title " required>
-      <fieldset class="fieldset">
-        <label for="title">
-          <span>Title</span>
-          <input type="radio" name="searchBy" value="title" required>
-        </label>
-      </fieldset>
-      <fieldset class="fieldset">
-        <label for="author">
-          <span>Author</span>
-          <input type="radio" name="searchBy" value="author" required>
-        </label>
-      </fieldset>
-      <button id="submit-form" type="submit">Search Google Books API</button>
-    </form>
-  </main>
-
-  <footer>
-    <%- include('../layout/footer.ejs') %>
-  
-  </footer>
+<body class="container">
+    <main>
+        <!-- <h4>Search by Title or Author</h4> -->
+        <form action="/searches" method="post">
+            <section class="sub-content">
+                <section class="grid-containerT">
+                    <input class="searchInput" type="text" name="search" placeholder="Enter a title or author" required>
+                    <fieldset>
+                        <label class="inpRadio1" for="title">
+            <span>Title</span>
+            <input type="radio" name="radio" value="title" required>
+          </label>
+                    </fieldset>
+                    <fieldset>
+                        <label class="inpRadio2" for="author">
+            <span>Author</span>
+            <input type="radio" name="radio" value="author" required>
+          </label>
+                    </fieldset>
+                    <!-- <fieldset>
+                        <label class="inpRadio2 for=" author ">
+            <span>Author</span>
+            <input type="radio " name="radio " value="author " required>
+          </label>
+            </fieldset> -->
+                    <button class="btn6 ">Search </button>
+                </section>
+            </section>
+        </form>
+    </main>
 </body>
+
 </html>

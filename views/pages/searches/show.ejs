@@ -1,41 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include('../layout/head.ejs') %> 
-
+    <%- include('../../layout/head.ejs')%>
+        <!-- <title>Book Collection</title> -->
 </head>
-<body>
-  <%- include('../layout/header.ejs') %>
 
-  <header>
-    <h1>Book App</h1>
-  </header>
-
-  <main>
-    
-    <h1 id="form-title">Search By Title or Author</h1>
-  
-    <section id="book-section">
-      <% searchResults.forEach(book => { %>
-        <section id="info-section">
-          <section id="img-section">
-            <img class="book-thumbnail" src="<%= book.thumbnail %>" alt="">
-          </section>
-          <p id="book-title"><%= book.title %></p>
-          <p id="book-author"><%= book.author %></p>
-          <p id="book-description"><%= book.description %></p>
+<body class="container">
+    <header class='one a'>
+        <%- include('../../layout/header.ejs')%>
+    </header>
+    <main>
+        <section>
+            <% book.forEach(book=>{%>
+                <section>
+                    <%- include('../../layout/form.ejs',{book:book})%>
+                </section>
+                <%})%>
         </section>
-      <% }); %>
-    </section>
-
-  </main>
-
-  <footer>
-    <footer>
-      <%- include('../layout/footer.ejs') %>
-    
-    </footer>
-  </footer>
-
+    </main>
 </body>
+
 </html>

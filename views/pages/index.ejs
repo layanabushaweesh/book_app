@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include('./layout/head.ejs') %>
+    <%- include('../layout/head.ejs')%>
 </head>
-<body>
-<!-- using partial reuse the code -->
-  <%- include('./layout/header.ejs') %>
 
-  <main>
-    
-    <h1 id="form-title"><%= rowCount %> Saved Books</h1>
-  
-    <%- include('./books/details.ejs') %>
-
-  </main>
-
-  <%- include('./layout/footer.ejs') %>
-  
+<body class="container">
+    <header class='one a'>
+        <%- include('../layout/header.ejs')%>
+            <section class="length">
+                <p>
+                    <%=book.length%> books</p>
+            </section>
+    </header>
+    <main class="sub-content">
+        <% book.forEach(item=>{%>
+            <section class="grid-container">
+                <img class="Bookimg" src="<%=item.image_url%>">
+                <p class="p1">
+                    <%=item.title%>
+                </p>
+                <p class="p2">
+                    <%=item.author%>
+                </p>
+                <button class="btn1"><a class="bookBtn" href="/books/<%=item.id%>">View Details</a></button>
+            </section>
+            <%})%>
+    </main>
 </body>
+
 </html>

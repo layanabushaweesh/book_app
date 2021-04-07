@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <%- include('../layout/head.ejs') %> 
-</head>
-<body>
-     
-  <header>
-    <%- include('../layout/header.ejs') %>
-  </header>
-<section id="book-section">
-    <% databaseResults.forEach(book => { %>
-      <section id="info-section">
-        <section id="img-section">
-          <img class="book-thumbnail" src="<%= book.thumbnail %>" alt="">
-        </section>
-        <p id="book-title"><%= book.title %></p>
-        <p id="book-author"><%= book.author %></p>
-        <p id="book-description"><%= book.description %></p>
-        <p id="book-isbn"><%= book.isbn %></p>
-        <p id="book-details"><a href="/books/<%= book.id %>">Show THE Detales</a></p>
-      </section>
-    <% }); %> 
-</section>
-<footer>
-  <%- include('../layout/footer.ejs') %>
 
-</footer>
-    
+<head>
+    <%- include('../../layout/head.ejs')%>
+</head>
+
+<body class="container">
+    <header class='one a'>
+        <%- include('../../layout/header.ejs')%>
+    </header>
+    <main class="sub-content">
+        <section class="grid-containerF">
+            <img class="Bookimg" src="<%=book.image_url%>">
+            <p class="p1">
+                <%=book.title%>
+            </p>
+            <p class="p2">
+                <%=book.author%>
+            </p>
+            <p class="p3">
+                <%=book.description%>
+            </p>
+        </section>
+    </main>
 </body>
+
 </html>
