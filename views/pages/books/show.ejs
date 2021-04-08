@@ -1,3 +1,20 @@
-<section>
-    <%- include('./detail.ejs')%>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+ <%- include('../layouts/head') %>
+
+    <body>
+           <%- include('../layouts/menu') %>
+           <%- include('../layouts/header') %>
+ <button type=""><a href="/">BACK TO HOME PAGE </a> </button>
+         <main>
+    <%- include('detail') %>
+
+
+    <%- include('../layouts/edit') %>
+
+         </main>
+             <%- include('../layouts/footer') %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/app.js"></script>
+    </body>
+</html>

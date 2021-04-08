@@ -1,32 +1,29 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <%- include('../layout/head.ejs')%>
-</head>
 
-<body class="container">
-    <header class='one a'>
-        <%- include('../layout/header.ejs')%>
-            <section class="length">
-                <p>
-                    <%=book.length%> books</p>
-            </section>
-    </header>
-    <main class="sub-content">
-        <% book.forEach(item=>{%>
-            <section class="grid-container">
-                <img class="Bookimg" src="<%=item.image_url%>">
-                <p class="p1">
-                    <%=item.title%>
-                </p>
-                <p class="p2">
-                    <%=item.author%>
-                </p>
-                <button class="btn1"><a class="bookBtn" href="/books/<%=item.id%>">View Details</a></button>
-            </section>
-            <%})%>
-    </main>
+    <%- include('./layouts/head') %>
+    <title>BOOK APP</title>
+    <%- include('./layouts/header') %>
+
+<body>
+ <%- include('./layouts/menu') %>
+ 
+<main>
+<section >
+<ul>
+<h2> total number of books : <%= count %> </h2>
+ <% books.forEach(el => { %>
+ <h4> title : <%= el.title %></h4>
+ <h4> author : <%= el.author %></h4>
+  <button type="button"><a href="/books/<%=el.id%>">VIEW THE DETALIS</a> </button> 
+      <% }); %>
+</ul>
+</section>
+
+</main>
+   <%- include('./layouts/footer') %>
+
 </body>
-
 </html>
