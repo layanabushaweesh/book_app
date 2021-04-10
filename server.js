@@ -1,18 +1,23 @@
+
 'use strict';
 // Dependencies
+
 require('dotenv').config();
 const express = require('express');
 const superagent = require('superagent');
+
 const cors = require('cors');
 const pg = require('pg');
 const methodOverride = require('method-override');
 const app = express();
+
 // Middleware
 app.use(cors());
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+
 // Setup environment
 const PORT = process.env.PORT || 3030;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -25,6 +30,7 @@ const client =  new pg.Client({
 app.get('/hello', (req, res) => {
   res.render('pages/index');
 });
+
 
 // HomePage
 const renderHomePage = (req, res) => {
@@ -117,7 +123,23 @@ const updateBook = (req, res) => {
     }).catch((err) => errorHandler(err, req, res));
 };
 
-// error path rout
+
+function deleteBook(req, res) {
+  const id = req.params.ID ;
+  const deleteSQL = `DELETE FROM books WHERE ID = ${id};`;
+  client.query(deleteSQL)
+    .then(() => {
+      res.redirect(`/books/${id}`);
+    }).catch((err) => errorHandler(err, req, res));
+
+app.get('/searches/new', show);
+
+// Creates a new search to the Google Books API
+app.post('/searches', search);
+
+
+// wrong path rout
+
 const handelWrongPath = (err, req, res) => {
   errorHandler(err, req ,res);
 };
@@ -131,6 +153,7 @@ client.connect().then(() => {
 }).catch(error => {
   console.log('error', error);
 });
+
 
 
 
@@ -158,3 +181,4 @@ function Book(data ) {
 function errorHandler(err, req, res) {
   res.render('pages/error', { err :err.message});
 }
+
