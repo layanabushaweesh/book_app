@@ -131,12 +131,7 @@ function deleteBook(req, res) {
     .then(() => {
       res.redirect(`/books/${id}`);
     }).catch((err) => errorHandler(err, req, res));
-
-app.get('/searches/new', show);
-
-// Creates a new search to the Google Books API
-app.post('/searches', search);
-
+}
 
 // wrong path rout
 
@@ -153,7 +148,6 @@ client.connect().then(() => {
 }).catch(error => {
   console.log('error', error);
 });
-
 
 
 
