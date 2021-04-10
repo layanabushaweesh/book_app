@@ -11,22 +11,38 @@ const pg = require('pg');
 const methodOverride = require('method-override');
 const app = express();
 
+// Middleware
+app.use(cors());
+app.use(methodOverride('_method'));
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
+
 // Setup environment
 const PORT = process.env.PORT || 3030;
 const DATABASE_URL = process.env.DATABASE_URL;
 
+// database Setup
+const client =  new pg.Client({
+  connectionString: DATABASE_URL,
+});
+// Just to  a test
+app.get('/hello', (req, res) => {
+  res.render('pages/index');
+});
 
 
-// Search for a book by title 
-const renderSearch = (req, res) => {
-  res.render('pages/searches/new');
+// HomePage
+const renderHomePage = (req, res) => {
+  const selectAll = 'select * from books ;';
+  client.query(selectAll).then((data) =>{
+    res.render('pages/index', {books : data.rows , count: data.rows.length});
+  }).catch((err) => errorHandler(err, req, res));
 };
-
 // Show Search Results
 const renderSearchResults = (req, res) => {
   const searchKeyword = req.body.searched;
   const searchBy = req.body.searchBy;
-  // let url = `https://www.googleapis.com/books/v1/volumes?q=${req.body.searchQuery}+${req.body.searchBy === 'title' ? 'intitle' : 'inauthor'}`;
   const url = `https://www.googleapis.com/books/v1/volumes?langRestrict=en&q=${searchKeyword}+in${searchBy}:`;
 
   superagent.get(url).then((data) => {
@@ -38,14 +54,22 @@ const renderSearchResults = (req, res) => {
   }).catch((err) => errorHandler(err, req, res));
 };
 
-// Adding  to The Home Page
-const addBook = (req,res) => {
+
+// Search for a book by title or author
+const renderSearch = (req, res) => {
+  res.render('pages/searches/new');
+};
+
+
+
+// Adding a Book to The Home Page
+const addBookToFavorite = (req,res) => {
   let id ;
   let SQL = 'INSERT INTO books (title, author, description, image_url , offShelf ,isbn) VALUES ($1,$2,$3,$4,$5,$6) RETURNING ID;';
   const { title, author, description, image_url , offShelf , isbn } = req.body;
   const values = [title, author, description, image_url , offShelf ,isbn ];
-  const sqlSearch = `SELECT * FROM books WHERE isbn = '${isbn}' ;`;
-  client.query(sqlSearch).then((searchedResult) => {
+  const query = `SELECT * FROM books WHERE isbn = '${isbn}' ;`;
+  client.query(query).then((searchedResult) => {
     if (searchedResult.rowCount > 0) {
       res.redirect(`/books/${searchedResult.rows[0].id}`);
     }
@@ -62,8 +86,8 @@ const addBook = (req,res) => {
   });
 };
 
-// Single Book 
-const showBook = (req,res) => {
+// Single Book Details
+const showBookDetails = (req,res) => {
   const SQL = `SELECT * from books WHERE ID=${req.params.ID};`;
   client.query(SQL)
     .then(result => {
@@ -73,7 +97,18 @@ const showBook = (req,res) => {
 };
 
 
-// Update The Database
+function deleteBook(req, res) {
+  const id = req.params.ID ;
+  const sql = `DELETE FROM books WHERE ID = ${id};`;
+  client.query(sql)
+    .then(() => {
+      res.redirect(`/books/${id}`);
+    }).catch((err) => errorHandler(err, req, res));
+
+
+}
+
+// Update Book in The Database
 const updateBook = (req, res) => {
   const id = req.params.ID ;
   console.log('req.body', req.body);
@@ -87,6 +122,7 @@ const updateBook = (req, res) => {
       res.redirect(`/books/${id}`);
     }).catch((err) => errorHandler(err, req, res));
 };
+
 
 function deleteBook(req, res) {
   const id = req.params.ID ;
@@ -102,9 +138,8 @@ app.get('/searches/new', show);
 app.post('/searches', search);
 
 
-}
-
 // wrong path rout
+
 const handelWrongPath = (err, req, res) => {
   errorHandler(err, req ,res);
 };
@@ -118,4 +153,32 @@ client.connect().then(() => {
 }).catch(error => {
   console.log('error', error);
 });
+
+
+
+
+
+
+app.get('/', renderHomePage);
+app.get('/searches/new', renderSearch);
+app.post('/searches', renderSearchResults);
+app.get('/books/:ID', showBookDetails);
+app.post('/books', addBookToFavorite);
+app.put('/books/:ID', updateBook);
+app.delete('/books/:ID', deleteBook);
+app.use('*',handelWrongPath);
+// constructor
+function Book(data ) {
+  this.title = (data.title)? data.title : 'Unknown Book Title';
+  this.author = (data.authors)? data.authors : 'Unknown Book Authors';
+  this.description = (data.description)? data.description : 'Description not available';
+  this.thumbnail = (data.imageLinks.thumbnail) ? data.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+  this.isbn = data.industryIdentifiers ? `${data.industryIdentifiers[0].type} ${data.industryIdentifiers[0].identifier}` : 'Unknown ISBN';
+  this.offShelf = (data.categories) ? data.categories : 'The book is not in a shelf';
+
+}
+// Error Handler 
+function errorHandler(err, req, res) {
+  res.render('pages/error', { err :err.message});
+}
 
