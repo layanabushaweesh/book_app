@@ -1,42 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+  <%- include('../layouts/head') %>
 
-<head>
-    <%- include('../../layout/head.ejs')%>
+    <%- include('../layouts/header') %>
 
-        <!-- <title>Book Collection</title> -->
-</head>
 
-<body class="container">
-    <main>
-        <!-- <h4>Search by Title or Author</h4> -->
-        <form action="/searches" method="post">
-            <section class="sub-content">
-                <section class="grid-containerT">
-                    <input class="searchInput" type="text" name="search" placeholder="Enter a title or author" required>
-                    <fieldset>
-                        <label class="inpRadio1" for="title">
-            <span>Title</span>
-            <input type="radio" name="radio" value="title" required>
-          </label>
-                    </fieldset>
-                    <fieldset>
-                        <label class="inpRadio2" for="author">
-            <span>Author</span>
-            <input type="radio" name="radio" value="author" required>
-          </label>
-                    </fieldset>
-                    <!-- <fieldset>
-                        <label class="inpRadio2 for=" author ">
-            <span>Author</span>
-            <input type="radio " name="radio " value="author " required>
-          </label>
-            </fieldset> -->
-                    <button class="btn6 ">Search </button>
-                </section>
-            </section>
-        </form>
-    </main>
+<body >
+       <%- include('../layouts/menu') %>
+<section >
+    <form action="/searches" method="POST">
+    <fieldset>
+    <legend>Search by Title or Author</legend>
+    <label for="search">Search </label>
+    <input type="text" name="searched">
+
+    <label for="title">Title</label>
+    <input type="radio" name="searchBy" value = "title" required><br>
+
+    <label for="author">Author</label>
+    <input type="radio" name="searchBy" value = "author" required><br>
+
+    <button type="submit">Search the Google Book API</button>
+    </fieldset>
+    
+    </form>
+    </section>
+                 <%- include('../layouts/footer') %>
 </body>
-
 </html>

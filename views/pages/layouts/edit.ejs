@@ -1,0 +1,28 @@
+<% if (books) { %>
+
+<div  class='updateForm'>
+<form action="/books/<%= books.id %>?_method=PUT" method="POST" >
+    <fieldset>
+ 
+
+        <label for="img">Image: </label>
+        <input id="img" type="text" name="img" value="<%= books.image_url %> " disabled/><br><br>
+        <label for="title">Title: </label>
+        <input id="title" type="text" name="title" value="<%=  books.title %>" /><br><br>
+        <label for="author">Author: </label>
+        <input id="author" type="text" name="author" value="<%= books.author %>" /><br><br>
+        <label for="isbn">ISBN:</label>
+        <input id="isbn" type="text" name="isbn" value="<%= books.isbn %>" /><br><br>
+        <label for="shelf">Bookshelf:</label>
+        <input id="shelf" type="text" name="shelf" value="<%= books.offshelf %>" /><br><br>
+        <label for="description">Description: </label>
+        <textarea id="description" type="text" name="description" rows="10" cols="100">
+    <%= books.description %>
+    </textarea><br>
+
+        <button type="submit">Update Book</button>
+        <br>
+        <% } %>
+    </fieldset>
+</form>
+</div>

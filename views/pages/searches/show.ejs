@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <%- include('../../layout/head.ejs')%>
-        <!-- <title>Book Collection</title> -->
-</head>
 
-<body class="container">
-    <header class='one a'>
-        <%- include('../../layout/header.ejs')%>
-    </header>
+    <title>Show</title>
+
+     <%- include('../layouts/head') %>
+
+     <%- include('../layouts/header') %>
+<body>
+
+     <%- include('../layouts/menu') %>
+
     <main>
-        <section>
-            <% book.forEach(book=>{%>
-                <section>
-                    <%- include('../../layout/form.ejs',{book:book})%>
-                </section>
-                <%})%>
+        <h1>Results:</h1>
+        <div>
+    <% books.forEach(book => { %>
+    <section class="card">
+        <section id="img-section">
+          <img src="<%= book.thumbnail %>" alt="">
         </section>
+        <p><%= book.title %></p>
+        <p><%= book.author %></p>
+        <p><%= book.description %></p>
+         <p><%= book.isbn %></p>
+        <p><%= book.offShelf %></p>
+ <form action='/books' method="POST">
+  <input name="title" value="<%= book.title %>" class="hidden">
+  <input name="author" value="<%= book.author %>" class="hidden">
+  <input name="description" value="<%= book.description %>" class="hidden">
+  <input name="image_url" value="<%= book.thumbnail %>" class="hidden">
+  <input name="isbn" value="<%= book.isbn %>" class="hidden">
+  <input name="offShelf" value="<%= book.offShelf %>" class="hidden">
+
+  <button type="submit">Select This Book</button>
+                        </form>
+      </section>
+    <% }); %>
+        </div>
     </main>
+             <%- include('../layouts/footer') %>
+
 </body>
 
 </html>
