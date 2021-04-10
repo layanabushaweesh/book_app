@@ -1,8 +1,11 @@
+
 'use strict';
 // Dependencies
+
 require('dotenv').config();
 const express = require('express');
 const superagent = require('superagent');
+
 const cors = require('cors');
 const pg = require('pg');
 const methodOverride = require('method-override');
@@ -12,30 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 3030;
 const DATABASE_URL = process.env.DATABASE_URL;
 
-// Middleware
-app.use(cors());
-app.use(methodOverride('_method'));
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
 
-// database Setup
-const client =  new pg.Client({
-  connectionString: DATABASE_URL,
-});
-
-// HomePage
-const home = (req, res) => {
-  const select = 'select * from books ;';
-  client.query(select).then((data) =>{
-    res.render('pages/index', {books : data.rows , count: data.rows.length});
-  }).catch((err) => errorHandler(err, req, res));
-};
-
-// Just a test
-app.get('/hello', (req, res) => {
-  res.render('pages/index');
-});
 
 // Search for a book by title 
 const renderSearch = (req, res) => {
@@ -116,6 +96,11 @@ function deleteBook(req, res) {
       res.redirect(`/books/${id}`);
     }).catch((err) => errorHandler(err, req, res));
 
+app.get('/searches/new', show);
+
+// Creates a new search to the Google Books API
+app.post('/searches', search);
+
 
 }
 
@@ -134,29 +119,3 @@ client.connect().then(() => {
   console.log('error', error);
 });
 
-// constructor
-function Book(data ) {
-  this.title = (data.title)? data.title : 'Unknown Book Title';
-  this.author = (data.authors)? data.authors : 'Unknown Book Authors';
-  this.description = (data.description)? data.description : 'Description not available';
-  this.thumbnail = (data.imageLinks.thumbnail) ? data.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
-  this.isbn = data.industryIdentifiers ? `${data.industryIdentifiers[0].type} ${data.industryIdentifiers[0].identifier}` : 'Unknown ISBN';
-  this.offShelf = (data.categories) ? data.categories : 'The book is not in a shelf';
-
-}
-
-
-// API home page Routes
-app.get('/', home);
-app.get('/searches/new', renderSearch);
-app.post('/searches', renderSearchResults);
-app.get('/books/:ID', showBook);
-app.post('/books', addBook);
-app.put('/books/:ID', updateBook);
-app.delete('/books/:ID', deleteBook);
-app.use('*',handelWrongPath);
-
-// Error Handler
-function errorHandler(err, req, res) {
-  res.render('pages/error', { err :err.message});
-}
