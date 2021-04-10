@@ -1,0 +1,18 @@
+
+  .card{
+    background-color: var(--yellow);
+      width: 80%;
+      height: 100%;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.336);
+  }
+ 
+  
+  #buttons{
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+  }
+  
